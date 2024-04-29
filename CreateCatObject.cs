@@ -25,6 +25,10 @@ public class CreateCatObject {
         cat.Geburtstag = getRandomCatBirthday();
         Console.WriteLine("Cat birthday: " + cat.Geburtstag);
 
+        // cat age
+        cat.Alter = DateTime.Today.Year - DateTime.Parse(cat.Geburtstag).Year;
+        Console.WriteLine("Cat age: " + cat.Alter);
+
         // cat environment
         cat.Umgebung = getRandomEnvironment();
         Console.WriteLine("Cat environment: " + cat.Umgebung);
@@ -50,7 +54,7 @@ public class CreateCatObject {
         //Console.WriteLine("Cat enddatum: " + cat.Enddatum);
 
         // cat deckung
-        cat.Deckung = rnd.Next(0, 100)*1000;
+        cat.Deckung = rnd.Next(0, 50)*1000;
         Console.WriteLine("Cat deckung: " + cat.Deckung);
 
         return cat;

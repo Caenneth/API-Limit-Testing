@@ -11,6 +11,7 @@ namespace Catnamespace
         public CatBreed Rasse { get; set; }
         public string Farbe { get; set; }
         public string Geburtstag { get; set; }
+        public int Alter { get; set; }
         public string Persönlichkeit { get; set; }
         public string Umgebung { get; set; }
         public int Gewicht { get; set; }

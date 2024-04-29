@@ -22,12 +22,20 @@ public class Program {
             promillesatz += 0.5;
         }
 
-        double grundkosten = cat.Deckung * (promillesatz/1000);
+        // berechne grundkosten
+        double grundkosten = cat.Deckung/1000 * promillesatz;
         Console.WriteLine("Grundkosten: " + grundkosten);
 
         double prozentSatz = 0.0;
         // aufschlag für alter
         // TODO: Create basic cat data and then compare average age with age of cat
+        if (cat.Alter < 2) {
+            prozentSatz += 0.1;
+        }
+        if (cat.Rasse.Durchschnittsalter < cat.Alter)
+        {
+            prozentSatz += 0.2;
+        }
 
         // aufschlag für umgebung
         if (cat.Umgebung == "Draußen") 
@@ -37,28 +45,41 @@ public class Program {
 
         // aufschlag für postleitzahl
         // wenn postleitzahl mit 0 oder 1 beginnt dann 5% aufschlag
-
         if (customer.Postleitzahl[0] == '0' || customer.Postleitzahl[0] == '1') 
         {
             prozentSatz += 0.05;
         }
 
-        Console.WriteLine("Promillesatz: " + promillesatz);
+        prozentSatz += 1;
+        Math.Round(prozentSatz, 2);
 
-        double gkpz = grundkosten * (prozentSatz+1);
+        Console.WriteLine("ProzentSatz: " + prozentSatz);
+        double prozentZuschlag = Math.Round(grundkosten * (prozentSatz), 2);
+        Console.WriteLine("Grundkosten plus ProzentSatz: " + prozentZuschlag);
 
-
+        int aufschlag = 0;
         // aufschlag für gewicht über der norm
         // TODO: Create basic cat data and then compare average weight with weight of cat
+        if (cat.Rasse.Durchschnittsgewicht < cat.Gewicht)
+        {
+            int gewichtAufschlag = (cat.Gewicht - cat.Rasse.Durchschnittsgewicht)/1000;
+            Console.WriteLine("Gewichtaufschlag: " + gewichtAufschlag);
+            aufschlag += gewichtAufschlag; 
+        }
 
         // aufschlag für kastriert
-        // TODO: Check if price is added when cat is castrated or when it is not castrated
         if (cat.Kastriert) 
         {
-            prozentSatz += 0.1;
+            aufschlag += 5;
+            Console.WriteLine("Kastriertaufschlag: " + 5);
         }
 
         // aufschlag für krankheitswahrscheinlichkeit
+        Console.WriteLine("Krankheitsanfälligkeitsaufschlag: " + cat.Rasse.Krankheitsanfälligkeit);
+        aufschlag += cat.Rasse.Krankheitsanfälligkeit;
+
+        double endkosten = grundkosten + prozentZuschlag + aufschlag;
+        Console.WriteLine("Gesamtpreis: " + endkosten);
     }
 
     public static async Task Main() {
