@@ -4,58 +4,62 @@ public class CreateCatObject {
 
     private static Random rnd = new Random();
 
-    public static Cat createCat() {
+    public static Cat CreateCat(bool print) {
 
         // create cat
         Cat cat = new Cat();
 
         // cat type
         cat.Rasse = getRandomCatType();
-        Console.WriteLine("Cat type: " + cat.Rasse.RassenName);
-
+        
         // cat name
         cat.Name = getRandomCatName();
-        Console.WriteLine("Cat name: " + cat.Name);
 
         // cat color
         cat.Farbe = getRandomCatColor(cat);
-        Console.WriteLine("Cat color: " + cat.Farbe);
-
+        
         // cat birthday
         cat.Geburtstag = getRandomCatBirthday();
-        Console.WriteLine("Cat birthday: " + cat.Geburtstag);
 
         // cat age
         cat.Alter = DateTime.Today.Year - DateTime.Parse(cat.Geburtstag).Year;
-        Console.WriteLine("Cat age: " + cat.Alter);
-
+        
         // cat environment
         cat.Umgebung = getRandomEnvironment();
-        Console.WriteLine("Cat environment: " + cat.Umgebung);
-
+        
         // cat weight
         cat.Gewicht = rnd.Next(500, 12000);
-        Console.WriteLine("Cat weight: " + cat.Gewicht);
-
+        
         // cat castrated
         cat.Kastriert = rnd.Next(0, 2) == 1;
-        Console.WriteLine("Cat castrated: " + cat.Kastriert);
-
+        
         // cat personality
         cat.Persönlichkeit = getRandomCatPersonality();
-        Console.WriteLine("Cat personality: " + cat.Persönlichkeit);
-
+        
         // cat beginndatum
         //cat.Beginndatum = DateTime.Today.AddDays(-rnd.Next(365));
-        //Console.WriteLine("Cat beginndatum: " + cat.Beginndatum);
-
+        
         // cat enddatum
         //cat.Enddatum = DateTime.Today.AddDays(rnd.Next(365));
-        //Console.WriteLine("Cat enddatum: " + cat.Enddatum);
-
+        
         // cat deckung
         cat.Deckung = rnd.Next(0, 50)*1000;
-        Console.WriteLine("Cat deckung: " + cat.Deckung);
+
+
+        if (print) {
+            Console.WriteLine("Cat type: " + cat.Rasse.RassenName);
+            Console.WriteLine("Cat name: " + cat.Name);
+            Console.WriteLine("Cat color: " + cat.Farbe);
+            Console.WriteLine("Cat birthday: " + cat.Geburtstag);
+            Console.WriteLine("Cat age: " + cat.Alter);
+            Console.WriteLine("Cat environment: " + cat.Umgebung);
+            Console.WriteLine("Cat weight: " + cat.Gewicht);
+            Console.WriteLine("Cat castrated: " + cat.Kastriert);
+            Console.WriteLine("Cat personality: " + cat.Persönlichkeit);
+            //Console.WriteLine("Cat beginndatum: " + cat.Beginndatum);
+            //Console.WriteLine("Cat enddatum: " + cat.Enddatum);
+            Console.WriteLine("Cat deckung: " + cat.Deckung);
+        }
 
         return cat;
     }

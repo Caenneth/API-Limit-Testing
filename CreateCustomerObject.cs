@@ -4,47 +4,37 @@ public class CreateCustomerObject {
 
     private static Random rnd = new Random();
 
-    public static Customer createCustomer() {
+    public static Customer CreateCustomer(bool print) {
         // create customer
         Customer customer = new Customer();
         
         // vorname
         customer.Vorname = getRandomCustomerName();
-        Console.WriteLine("Vorname: " + customer.Vorname);
-
+       
         // nachname
         customer.Nachname = getRandomCustomerSurname();
-        Console.WriteLine("Nachname: " + customer.Nachname);
 
         // straße
         customer.Straße = getRandomCustomerStraße();
-        Console.WriteLine("Straße: " + customer.Straße);
-
+        
         // hausnummer
         customer.Hausnummer = rnd.Next(1, 500).ToString();
-        Console.WriteLine("Hausnummer: " + customer.Hausnummer);
-
+        
         // postleitzahl
         int postleitzahl = rnd.Next(0, 50000);
         customer.Postleitzahl = postleitzahl.ToString("D5");
-        Console.WriteLine("Postleitzahl: " + customer.Postleitzahl);
-
-
+        
         // stadt
         customer.Stadt = getRandomCustomerStadt();
-        Console.WriteLine("Stadt: " + customer.Stadt);
-
+        
         // titel
         customer.Titel = getRandomCustomerTitel();
-        Console.WriteLine("Titel: " + customer.Titel);
 
         // iban
         long part1 = (long)rnd.Next(0, int.MaxValue) << 32;
         long part2 = (long)rnd.Next(0, int.MaxValue);
         long randomNumber = part1 | part2;
-
         customer.IBAN = "DE22" + randomNumber.ToString("D18");
-        Console.WriteLine("IBAN: " + customer.IBAN);
 
         // bic
         // random 4 length string
@@ -52,20 +42,32 @@ public class CreateCustomerObject {
         string randomString = new string(Enumerable.Repeat(chars, 4)
         .Select(s => s[rnd.Next(s.Length)]).ToArray());
         customer.BIC = randomString + "DE" + rnd.Next(0, 100000).ToString("D5");
-        Console.WriteLine("BIC: " + customer.BIC);
-
+        
         // familienstatus
         customer.Familienstatus = getRandomCustomerStatus();
-        Console.WriteLine("Familienstatus: " + customer.Familienstatus);
 
         // email
         // TODO: use non existing emails or use 1 email where all mails get send do
         //customer.Email = customer.Vorname + "." + customer.Nachname + "@gmail.com";
-        //Console.WriteLine("Email: " + customer.Email);
+        
         customer.Email = "finnwolters@web.de";
 
         // sv_nummer 
         // 8 ziffern + 1 letter + 3 ziffern
+        if (print) {
+            Console.WriteLine("Vorname: " + customer.Vorname);
+            Console.WriteLine("Nachname: " + customer.Nachname);
+            Console.WriteLine("Straße: " + customer.Straße);
+            Console.WriteLine("Hausnummer: " + customer.Hausnummer);
+            Console.WriteLine("Postleitzahl: " + customer.Postleitzahl);
+            Console.WriteLine("Stadt: " + customer.Stadt);
+            Console.WriteLine("Titel: " + customer.Titel);
+            Console.WriteLine("IBAN: " + customer.IBAN);
+            Console.WriteLine("BIC: " + customer.BIC);
+            Console.WriteLine("Familienstatus: " + customer.Familienstatus);
+            Console.WriteLine("Email: " + customer.Email);
+        }
+
         return customer;
     }
 

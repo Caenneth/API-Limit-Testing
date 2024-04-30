@@ -5,7 +5,7 @@ using System.Net.Http;
 public class API_Request_AWS {
     public async Task SendRequest(int coverage, string breed, string color, string birthDate, bool neutered, string personality, string environment, int weight, int zipCode)
     {
-        Console.WriteLine("Sending request to Azure API");
+        //Console.WriteLine("Sending request to Azure API");
         var client = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(10)
@@ -30,11 +30,12 @@ public class API_Request_AWS {
         };
 
         var jsonData = JsonSerializer.Serialize(data, options);
+        Console.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/rate", content);
+        var response = await client.PostAsync("https://w7gl0flz6e.execute-api.eu-central-1.amazonaws.com/Stage/rate", content);
         var responseString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(responseString);
+        Console.WriteLine("AWS Data: " + responseString);
         return;
     }
 }
