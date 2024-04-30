@@ -23,16 +23,18 @@ namespace Catnamespace
     public class CatBreed 
     {
         public string RassenName { get; set; }
-        public int Durchschnittsgewicht { get; set; }
+        public int MaxGewicht { get; set; }
+        public int MinGewicht { get; set; }
         public int Durchschnittsalter { get; set; }
         public int Krankheitsanfälligkeit { get; set; }
 
-        public CatBreed(string rassenName, int durchschnittsgewicht, int durchschnittsalter, int krankheitsanfälligkeit) 
+        public CatBreed(string rassenName, int maxGewicht, int minGewicht, int durchschnittsalter, int krankheitsanfälligkeit) 
         {
             RassenName = rassenName;
-            Durchschnittsgewicht = durchschnittsgewicht;
+            MaxGewicht = maxGewicht;
             Durchschnittsalter = durchschnittsalter;
             Krankheitsanfälligkeit = krankheitsanfälligkeit;
+            MinGewicht = minGewicht;
         }
     }
 }

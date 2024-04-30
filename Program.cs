@@ -5,10 +5,11 @@ using Customernamespace;
 
 public class Program {
 
-    public static async Task SendAPIRequest(int amount)
+    public static async Task SendAPIRequest(bool print)
     {
-        Customer customer = CreateCustomerObject.CreateCustomer(false);
-        Cat cat = CreateCatObject.CreateCat(false);
+        Customer customer = CreateCustomerObject.CreateCustomer(print);
+        Cat cat = CreateCatObject.CreateCat(print);
+        Console.WriteLine("Deckung: " + cat.Deckung);
 
         API_Request_Azure apiRequestAzure = new API_Request_Azure();
         await apiRequestAzure.SendRequest(cat.Deckung, cat.Rasse.RassenName, cat.Farbe, cat.Geburtstag, cat.Kastriert, cat.Persönlichkeit, cat.Umgebung, cat.Gewicht, int.Parse(customer.Postleitzahl));
@@ -18,8 +19,14 @@ public class Program {
         double grundkosten = BerechneGrundkosten(cat);
         double prozentSatz = BerechneProzentsatz(customer, cat);
         double aufschlag = BerechneAufschlag(cat);
+        if (print) {
+            Console.WriteLine("Grundkosten: " + grundkosten);
+            Console.WriteLine("ProzentSatz: " + prozentSatz);
+            Console.WriteLine("Aufschlag: " + aufschlag);
+        }
 
-        double endkosten = (grundkosten * prozentSatz) + aufschlag;
+
+        double endkosten = Math.Round((grundkosten * prozentSatz) + aufschlag, 2);
         Console.WriteLine("Gesamtpreis: " + endkosten);
     }
 
@@ -28,7 +35,9 @@ public class Program {
         int aufschlag = 0;
         // aufschlag für gewicht über der norm
         // 1 kg = 1€
-        if (cat.Rasse.Durchschnittsgewicht < cat.Gewicht) { aufschlag += (cat.Gewicht - cat.Rasse.Durchschnittsgewicht) / 1000; }
+        if (cat.Rasse.MaxGewicht < cat.Gewicht) { aufschlag += ((cat.Gewicht - cat.Rasse.MaxGewicht) / 1000)*5; }
+        if (cat.Rasse.MinGewicht > cat.Gewicht) { aufschlag += ((cat.Rasse.MinGewicht - cat.Gewicht) / 1000)*5; }
+
 
         // aufschlag für kastriert
         // wenn nicht kastriert dann 5€ aufschlag
@@ -37,7 +46,6 @@ public class Program {
         // aufschlag für krankheitswahrscheinlichkeit
         // Pro Wahrscheinlichkeit = 1€
         aufschlag += cat.Rasse.Krankheitsanfälligkeit;
-        Console.WriteLine("Aufschlag: " + aufschlag);
         return aufschlag;
     }
 
@@ -58,8 +66,7 @@ public class Program {
         // wenn postleitzahl mit 0 oder 1 beginnt dann 5% aufschlag
         if (customer.Postleitzahl[0] == '0' || customer.Postleitzahl[0] == '1') { prozentSatz += 0.05; }
 
-        Math.Round(prozentSatz, 2);
-        Console.WriteLine("ProzentSatz: " + prozentSatz);
+        prozentSatz = Math.Round(prozentSatz, 2);
         return prozentSatz;
     }
 
@@ -74,14 +81,15 @@ public class Program {
 
         // berechne grundkosten
         double grundkosten = cat.Deckung / 1000 * promillesatz;
-        Console.WriteLine("Grundkosten: " + grundkosten);
         return grundkosten;
     }
 
     public static async Task Main() {
-        int amount = 1;
-        await SendAPIRequest(amount);
+        int amount = 10;
+        for (int i = 0; i < amount; i++) {
+            Console.WriteLine("Test " + (i + 1) + " von " + amount);
+            await SendAPIRequest(false);
+            Console.WriteLine("-------------------------------------------------");
+        }
     }
-
-
 }

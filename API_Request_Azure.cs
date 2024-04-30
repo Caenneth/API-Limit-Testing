@@ -30,7 +30,7 @@ public class API_Request_Azure {
         };
 
         var jsonData = JsonSerializer.Serialize(data, options);
-        Console.WriteLine(jsonData);
+        //Console.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
         var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/rate", content);

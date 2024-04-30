@@ -75,15 +75,15 @@ public class CreateCatObject {
     {
         CatBreed[] catBreeds = 
         {
-            new CatBreed("Siamese", 7000, 14, 2),
-            new CatBreed("Perser", 7000, 15, 3),
-            new CatBreed("Bengal", 6000, 13, 4),
-            new CatBreed("Maine Coon", 10000, 14, 2),
-            new CatBreed("Sphynx", 6000, 11, 5),
-            new CatBreed("Scottish Fold", 6000, 14, 6),
-            new CatBreed("British Shorthair", 6000, 14, 2),
-            new CatBreed("British Shorthair", 5000, 14, 4),
-            new CatBreed("Ragdoll", 7000, 14, 3)
+            new CatBreed("Siamese", 7000, 4000, 11, 2),
+            new CatBreed("Perser", 7000, 4000, 12, 3),
+            new CatBreed("Bengal", 6000, 4000, 12, 4),
+            new CatBreed("Maine Coon", 10000, 5000, 11, 2),
+            new CatBreed("Sphynx", 6000, 4000, 9, 5),
+            new CatBreed("Scottish Fold", 6000, 4000, 11, 6),
+            new CatBreed("British Shorthair", 6000, 4000, 11, 2),
+            new CatBreed("Abyssinian", 5000, 3000, 11, 4),
+            new CatBreed("Ragdoll", 7000, 4000, 11, 3)
         };
         int index = rnd.Next(catBreeds.Length);
         return catBreeds[index];
