@@ -12,6 +12,7 @@ C:\Users\Finn_\Desktop\Tests\obj\Debug\net8.0\refint\Tests.dll
 C:\Users\Finn_\Desktop\Tests\obj\Debug\net8.0\Tests.pdb
 C:\Users\Finn_\Desktop\Tests\obj\Debug\net8.0\Tests.genruntimeconfig.cache
 C:\Users\Finn_\Desktop\Tests\obj\Debug\net8.0\ref\Tests.dll
+<<<<<<< Updated upstream
 C:\Users\finnw\Desktop\BP\azuretests\obj\Debug\net8.0\Tests.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\finnw\Desktop\BP\azuretests\obj\Debug\net8.0\Tests.AssemblyInfoInputs.cache
 C:\Users\finnw\Desktop\BP\azuretests\obj\Debug\net8.0\Tests.AssemblyInfo.cs
@@ -27,3 +28,6 @@ C:\Users\finnw\Desktop\BP\azuretests\bin\Debug\net8.0\Tests.dll
 C:\Users\finnw\Desktop\BP\azuretests\bin\Debug\net8.0\Tests.pdb
 C:\Users\finnw\Desktop\BP\azuretests\obj\Debug\net8.0\Tests.genruntimeconfig.cache
 C:\Users\finnw\Desktop\BP\azuretests\obj\Debug\net8.0\ref\Tests.dll
+=======
+C:\Users\Finn_\Desktop\Tests\obj\Debug\net8.0\Tests.sourcelink.json
+>>>>>>> Stashed changes
