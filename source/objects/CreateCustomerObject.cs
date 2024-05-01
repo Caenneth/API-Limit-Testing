@@ -1,71 +1,50 @@
 using Customernamespace;
+using System.Text;
 
 public class CreateCustomerObject {
 
     private static Random rnd = new Random();
 
     public static Customer CreateCustomer(bool print) {
-        // create customer
-        Customer customer = new Customer();
-        
-        // vorname
-        customer.Vorname = getRandomCustomerName();
-       
-        // nachname
-        customer.Nachname = getRandomCustomerSurname();
 
-        // straße
-        customer.Straße = getRandomCustomerStraße();
-        
-        // hausnummer
-        customer.Hausnummer = rnd.Next(1, 500).ToString();
-        
-        // postleitzahl
-        int postleitzahl = rnd.Next(0, 50000);
-        customer.Postleitzahl = postleitzahl.ToString("D5");
-        
-        // stadt
-        customer.Stadt = getRandomCustomerStadt();
-        
-        // titel
-        customer.Titel = getRandomCustomerTitel();
+        var customer = new Customer 
+        {
+            Vorname = getRandomCustomerName(),
+            Nachname = getRandomCustomerSurname(),
+            Straße = getRandomCustomerStraße(),
+            Hausnummer = rnd.Next(1, 500).ToString(),
+            Postleitzahl = rnd.Next(0, 50000).ToString("D5"),
+            Stadt = getRandomCustomerStadt(),
+            Titel = getRandomCustomerTitel(),
+            IBAN = "DE22" + ((long)rnd.Next(0, int.MaxValue) << 32 | (long)rnd.Next(0, int.MaxValue)).ToString("D18"),
+            BIC = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 4).Select(s => s[rnd.Next(s.Length)]).ToArray()) + "DE" + rnd.Next(0, 100000).ToString("D5"),
+            Familienstatus = getRandomCustomerStatus(),
+            Email = "",
+            Geburtsdatum = getRandomBirthday(),
+            SV_Nummer = rnd.Next(10000000, 99999999).ToString() + (char)rnd.Next(65, 91) + rnd.Next(100, 999).ToString(),
+            SteuerID = rnd.Next(10000000, 99999999).ToString() + rnd.Next(100, 999).ToString(),
+        };
 
-        // iban
-        long part1 = (long)rnd.Next(0, int.MaxValue) << 32;
-        long part2 = (long)rnd.Next(0, int.MaxValue);
-        long randomNumber = part1 | part2;
-        customer.IBAN = "DE22" + randomNumber.ToString("D18");
-
-        // bic
-        // random 4 length string
-        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        string randomString = new string(Enumerable.Repeat(chars, 4)
-        .Select(s => s[rnd.Next(s.Length)]).ToArray());
-        customer.BIC = randomString + "DE" + rnd.Next(0, 100000).ToString("D5");
-        
-        // familienstatus
-        customer.Familienstatus = getRandomCustomerStatus();
-
-        // email
-        // TODO: use non existing emails or use 1 email where all mails get send do
-        //customer.Email = customer.Vorname + "." + customer.Nachname + "@gmail.com";
-        
         customer.Email = "finnwolters@web.de";
 
         // sv_nummer 
         // 8 ziffern + 1 letter + 3 ziffern
         if (print) {
-            Console.WriteLine("Vorname: " + customer.Vorname);
-            Console.WriteLine("Nachname: " + customer.Nachname);
-            Console.WriteLine("Straße: " + customer.Straße);
-            Console.WriteLine("Hausnummer: " + customer.Hausnummer);
-            Console.WriteLine("Postleitzahl: " + customer.Postleitzahl);
-            Console.WriteLine("Stadt: " + customer.Stadt);
-            Console.WriteLine("Titel: " + customer.Titel);
-            Console.WriteLine("IBAN: " + customer.IBAN);
-            Console.WriteLine("BIC: " + customer.BIC);
-            Console.WriteLine("Familienstatus: " + customer.Familienstatus);
-            Console.WriteLine("Email: " + customer.Email);
+            var sb = new StringBuilder();
+            sb.AppendLine($"Kundenvorname: {customer.Vorname}");
+            sb.AppendLine($"Kundenname: {customer.Nachname}");
+            sb.AppendLine($"Straße: {customer.Straße}");
+            sb.AppendLine($"Hausnummer: {customer.Hausnummer}");
+            sb.AppendLine($"Postleitzahl: {customer.Postleitzahl}");
+            sb.AppendLine($"Stadt: {customer.Stadt}");
+            sb.AppendLine($"Titel: {customer.Titel}");
+            sb.AppendLine($"IBAN: {customer.IBAN}");
+            sb.AppendLine($"BIC: {customer.BIC}");
+            sb.AppendLine($"Familienstatus: {customer.Familienstatus}");
+            sb.AppendLine($"Email: {customer.Email}");
+            sb.AppendLine($"Geburtstag: {customer.Geburtsdatum}");
+            
+            Console.WriteLine(sb.ToString());
         }
 
         return customer;
@@ -106,5 +85,12 @@ public class CreateCustomerObject {
         string[] statuses = new string[] {"Ledig", "Verheiratet", "Geschieden", "Verwitwet"};
         int index = rnd.Next(statuses.Length);
         return statuses[index];
+    }
+
+    public static string getRandomBirthday() {
+        DateTime start = DateTime.Today.AddYears(-80);
+        DateTime end = DateTime.Today.AddYears(-16);
+        int range = (end - start).Days;
+        return start.AddDays(rnd.Next(range)).ToString("yyyy-MM-dd");
     }
 }

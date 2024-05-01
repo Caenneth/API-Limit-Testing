@@ -1,70 +1,56 @@
 using Catnamespace;
+using System.Text;
 
 public class CreateCatObject {
 
     private static Random rnd = new Random();
 
-    public static Cat CreateCat(bool print) {
-
-        // create cat
-        Cat cat = new Cat();
-
-        // cat type
-        cat.Rasse = getRandomCatType();
-        
-        // cat name
-        cat.Name = getRandomCatName();
+    public static Cat CreateCat(bool print) 
+    {
+        var cat = new Cat
+        {
+            Rasse = getRandomCatType(),
+            Name = getRandomCatName(),
+            Geburtstag = getRandomCatBirthday(),
+            Umgebung = getRandomEnvironment(),
+            Gewicht = rnd.Next(500, 12000),
+            Kastriert = rnd.Next(0, 2) == 1,
+            Persönlichkeit = getRandomCatPersonality(),
+            Deckung = rnd.Next(0, 50) * 1000
+        };
 
         // cat color
         cat.Farbe = getRandomCatColor(cat);
-        
-        // cat birthday
-        cat.Geburtstag = getRandomCatBirthday();
-
         // cat age
         cat.Alter = DateTime.Today.Year - DateTime.Parse(cat.Geburtstag).Year;
-        
-        // cat environment
-        cat.Umgebung = getRandomEnvironment();
-        
-        // cat weight
-        cat.Gewicht = rnd.Next(500, 12000);
-        
-        // cat castrated
-        cat.Kastriert = rnd.Next(0, 2) == 1;
-        
-        // cat personality
-        cat.Persönlichkeit = getRandomCatPersonality();
         
         // cat beginndatum
         //cat.Beginndatum = DateTime.Today.AddDays(-rnd.Next(365));
         
         // cat enddatum
         //cat.Enddatum = DateTime.Today.AddDays(rnd.Next(365));
-        
-        // cat deckung
-        cat.Deckung = rnd.Next(0, 50)*1000;
 
+        if (print)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Katzenrasse: {cat.Rasse.RassenName}");
+            sb.AppendLine($"Name: {cat.Name}");
+            sb.AppendLine($"Farbe: {cat.Farbe}");
+            sb.AppendLine($"Geburtstag: {cat.Geburtstag}");
+            sb.AppendLine($"Ater: {cat.Alter}");
+            sb.AppendLine($"Umgebung: {cat.Umgebung}");
+            sb.AppendLine($"Gewicht: {cat.Gewicht}");
+            sb.AppendLine($"Kastriert: {cat.Kastriert}");
+            sb.AppendLine($"Persönlichkeit: {cat.Persönlichkeit}");
+            sb.AppendLine($"Deckung: {cat.Deckung}");
 
-        if (print) {
-            Console.WriteLine("Cat type: " + cat.Rasse.RassenName);
-            Console.WriteLine("Cat name: " + cat.Name);
-            Console.WriteLine("Cat color: " + cat.Farbe);
-            Console.WriteLine("Cat birthday: " + cat.Geburtstag);
-            Console.WriteLine("Cat age: " + cat.Alter);
-            Console.WriteLine("Cat environment: " + cat.Umgebung);
-            Console.WriteLine("Cat weight: " + cat.Gewicht);
-            Console.WriteLine("Cat castrated: " + cat.Kastriert);
-            Console.WriteLine("Cat personality: " + cat.Persönlichkeit);
-            //Console.WriteLine("Cat beginndatum: " + cat.Beginndatum);
-            //Console.WriteLine("Cat enddatum: " + cat.Enddatum);
-            Console.WriteLine("Cat deckung: " + cat.Deckung);
+            Console.WriteLine(sb.ToString());
         }
 
         return cat;
     }
 
-        public static string getRandomCatName() 
+    public static string getRandomCatName() 
     {
         // string array of cat names
         string[] names = new string[] { "Whiskers", "Tom", "Sylvester", "Garfield", "Salem", "Simba", "Felix", "Socks", "Mittens", "Tigger", "Kitty", "Luna", "Chloe", "Lucy", "Cleo", "Angel", "Molly", "Jasper", "Oreo", "Pepper", "Boots", "Misty", "Shadow", "Ginger", "Milo", "Charlie", "Pumpkin", "Sophie", "Max", "Princess", "Sam", "Missy", "Smokey", "Maggie", "Bella", "Tiger", "Lily", "Jack", "Lucky", "Zoe", "Coco", "Rocky", "Muffin", "Daisy", "Simon", "Baby", "Fiona", "Furball", "Oliver", "Peanut", "Midnight", "Sasha", "Bandit", "Boo"};
@@ -159,5 +145,4 @@ public class CreateCatObject {
         int index = rnd.Next(personalities.Length);
         return personalities[index];
     }   
-
 }
