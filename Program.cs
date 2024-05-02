@@ -29,13 +29,11 @@ public class MainClass {
         Stopwatch stopwatch1 = Stopwatch.StartNew();
         using (StreamWriter writer = new StreamWriter("output.txt")) {
             for (int i = 0; i < amount; i++) {
-                //Console.WriteLine($"Test {i + 1} von {amount}");
                 writer.WriteLine($"Test {i + 1} von {amount}");
                 Stopwatch stopwatch2 = Stopwatch.StartNew(); // Starten der Stoppuhr
-                await CustomerTesting.CreateContract(printExtraInfo, customers[i], cats[i], writer);
+                await CustomerTesting.AzureCreateContract(printExtraInfo, customers[i], cats[i], writer);
+                //await CustomerTesting.AWSCreateContract(printExtraInfo, customers[i], cats[i], writer);
                 stopwatch2.Stop(); // Stoppen der Stoppuhr
-                //Console.WriteLine($"Dauer der API-Anfrage: {stopwatch.ElapsedMilliseconds} ms"); // Ausgabe der verstrichenen Zeit in Millisekunden
-                //Console.WriteLine("-------------------------------------------------");
                 writer.WriteLine($"Dauer der API-Anfrage: {stopwatch2.ElapsedMilliseconds} ms"); // Schreiben der verstrichenen Zeit in Millisekunden in die Datei
                 writer.WriteLine("-------------------------------------------------");
             }
