@@ -16,8 +16,8 @@ public class CreateCustomerObject {
             Postleitzahl = rnd.Next(0, 50000).ToString("D5"),
             Stadt = getRandomCustomerStadt(),
             Titel = getRandomCustomerTitel(),
-            IBAN = "DE22" + ((long)rnd.Next(0, int.MaxValue) << 32 | (long)rnd.Next(0, int.MaxValue)).ToString("D18"),
-            BIC = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 4).Select(s => s[rnd.Next(s.Length)]).ToArray()) + "DE" + rnd.Next(0, 100000).ToString("D5"),
+            IBAN = "DE22" + (rnd.Next(100000000, 999999999) + rnd.Next(100000000, 999999999)).ToString("D18"),
+            BIC = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 4).Select(s => s[rnd.Next(s.Length)]).ToArray()) + "DE" + rnd.Next(0, 100000).ToString("D5"),
             Familienstatus = getRandomCustomerStatus(),
             Email = "",
             Geburtsdatum = getRandomBirthday(),
@@ -76,7 +76,7 @@ public class CreateCustomerObject {
 
     public static string getRandomCustomerTitel() 
     {
-        string[] titles = new string[] {"Dr.", "Prof. Dr.", "Dr. Dr.", "Prof. Dr. Dr."};
+        string[] titles = new string[] {"Dr.", "Prof. Dr.", "Dr. Dr.", "Prof. Dr. Dr"};
         int index = rnd.Next(titles.Length);
         return titles[index];
     }

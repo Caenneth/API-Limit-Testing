@@ -24,11 +24,11 @@ public class CreateCatObject {
         // cat age
         cat.Alter = DateTime.Today.Year - DateTime.Parse(cat.Geburtstag).Year;
         
-        // cat beginndatum
-        //cat.Beginndatum = DateTime.Today.AddDays(-rnd.Next(365));
-        
+        // cat startdatum
+        cat.Beginndatum = GetRandomFutureStartDate();
+
         // cat enddatum
-        //cat.Enddatum = DateTime.Today.AddDays(rnd.Next(365));
+        cat.Enddatum = GetRandomFutureEndDate(cat.Beginndatum);
 
         if (print)
         {
@@ -43,7 +43,8 @@ public class CreateCatObject {
             sb.AppendLine($"Kastriert: {cat.Kastriert}");
             sb.AppendLine($"Persönlichkeit: {cat.Persönlichkeit}");
             sb.AppendLine($"Deckung: {cat.Deckung}");
-
+            sb.AppendLine($"Startdatum: {cat.Beginndatum}");
+            sb.AppendLine($"Enddatum: {cat.Enddatum}");
             Console.WriteLine(sb.ToString());
         }
 
@@ -145,4 +146,38 @@ public class CreateCatObject {
         int index = rnd.Next(personalities.Length);
         return personalities[index];
     }   
+
+    public static string GetRandomFutureStartDate()
+    {
+        Random rand = new Random();
+        DateTime today = DateTime.Today;
+        int futureMonth = rand.Next(today.Month + 1, 6);
+        int day = rand.Next(2) == 0 ? 1 : 15;
+
+        DateTime futureDate = new DateTime(today.Year, futureMonth, day);
+
+        return futureDate.ToString("yyyy-MM-dd");
+    }
+
+    public static string GetRandomFutureEndDate(string startDate)
+    {
+        Random rand = new Random();
+        DateTime today = DateTime.Today;
+
+        // get the month of the start date
+        int startMonth = DateTime.Parse(startDate).Month;
+        // füge 1 bis 6 Monate hinzu
+        int futureMonth = rand.Next(startMonth + 1, startMonth + 7);
+        // wenn monat keine 31 tage hat erhöhe den monat um 1
+        if (futureMonth == 2 || futureMonth == 4 || futureMonth == 6 || futureMonth == 9 || futureMonth == 11)
+        {
+            futureMonth++;
+        }
+        // setze tag auf den 14 oder 31 des Monats
+        int day = rand.Next(2) == 0 ? 14 : 31;
+
+        DateTime futureDate = new DateTime(today.Year, futureMonth, day);
+
+        return futureDate.ToString("yyyy-MM-dd");
+    }
 }

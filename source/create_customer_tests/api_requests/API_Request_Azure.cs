@@ -60,9 +60,9 @@ public class Create_Customer_API_Request_Azure {
         Console.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        //var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/apply", content);
-        //var responseString = await response.Content.ReadAsStringAsync();
-        //Console.WriteLine("Azure Data: " + responseString);
+        var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/apply", content);
+        var responseString = await response.Content.ReadAsStringAsync();
+        Console.WriteLine("Azure Data: " + responseString);
         return;
     }
 }

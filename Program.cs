@@ -5,7 +5,7 @@ using Customer_Tests;
 
 public class MainClass {
     public static async Task Main() {
-        const int amount = 1;
+        const int amount = 100;
         var customers = new List<Customer>(amount);
         var cats = new List<Cat>(amount);
         var printExtraInfo = false;
