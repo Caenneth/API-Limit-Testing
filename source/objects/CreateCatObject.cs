@@ -16,7 +16,7 @@ public class CreateCatObject {
             Gewicht = rnd.Next(500, 12000),
             Kastriert = rnd.Next(0, 2) == 1,
             Persönlichkeit = getRandomCatPersonality(),
-            Deckung = rnd.Next(0, 50) * 1000
+            Deckung = rnd.Next(1, 50) * 1000
         };
 
         // cat color
@@ -88,11 +88,11 @@ public class CreateCatObject {
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Perser":
-                colors = new string[] {"Weiß", "Schildplatt", "Schwarz"};
+                colors = new string[] {"Weiß", "Schildpatt", "Schwarz"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Bengal":
-                colors = new string[] {"Braun", "Schildplatt", "Marmor"};
+                colors = new string[] {"Braun", "Schildpatt", "Marmor"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Maine Coon":
@@ -100,23 +100,23 @@ public class CreateCatObject {
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Sphynx":
-                colors = new string[] {"Seal", "Blau", "Lilac", "Creme", "Weiß", "Schildplatt", "Schwarz", "Braun", "Marmor", "Grau", "Zimt", "Rot"};
+                colors = new string[] {"Seal", "Blau", "Lilac", "Creme", "Weiß", "Schildpatt", "Schwarz", "Braun", "Marmor", "Grau", "Zimt", "Rot"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Scottish Fold":
-                colors = new string[] {"Seal", "Blau", "Lilac", "Creme", "Weiß", "Schildplatt", "Schwarz", "Braun", "Marmor", "Grau", "Zimt", "Rot"};
+                colors = new string[] {"Seal", "Blau", "Lilac", "Creme", "Weiß", "Schildpatt", "Schwarz", "Braun", "Marmor", "Grau", "Zimt", "Rot"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "British Shorthair":
-                colors = new string[] {"Seal", "Blau", "Lilac", "Creme", "Weiß", "Schildplatt", "Schwarz", "Braun", "Marmor", "Grau", "Zimt", "Rot"};
+                colors = new string[] {"Seal", "Blau", "Lilac", "Creme", "Weiß", "Schildpatt", "Schwarz", "Braun", "Marmor", "Grau", "Zimt", "Rot"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Abyssinian":
-                colors = new string[] {"Rot", "Schildplatt", "Zimt"};
+                colors = new string[] {"Rot", "Schildpatt", "Zimt"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
             case "Ragdoll":            
-                colors = new string[] {"Blau", "Seal", "Lilac", "Schildplatt"};
+                colors = new string[] {"Blau", "Seal", "Lilac", "Schildpatt"};
                 color = colors[rnd.Next(colors.Length)];
                 break;
         }

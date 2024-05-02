@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 
 public class Create_Customer_API_Request_Azure {
-    public async Task SendRequest(string Email, string FirstName, string LastName, string Title, string BirthDate, string SocialSecurityNumber, string TaxId, string Street, string HouseNumber, string ZipCode, string City, string Iban, string Bic, string Name, string StartDate, string EndDate, int Coverage, string CatName, string Breed, string Color, bool Neutered, string Personality, string Environemnt, int Weight)
+    public async Task SendRequest(string Email, string FirstName, string LastName, string Title, string BirthDate, string SocialSecurityNumber, string TaxId, string Street, string HouseNumber, string ZipCode, string City, string Iban, string Bic, string Name, string StartDate, string EndDate, int Coverage, string CatName, string Breed, string Color, bool Neutered, string Personality, string Environemnt, int Weight, StreamWriter writer)
     {
         //Console.WriteLine("Sending request to Azure API");
         var client = new HttpClient
@@ -57,12 +57,14 @@ public class Create_Customer_API_Request_Azure {
         };
 
         var jsonData = JsonSerializer.Serialize(data, options);
-        Console.WriteLine(jsonData);
+        writer.WriteLine(jsonData);
+        //Console.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
         var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/apply", content);
         var responseString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine("Azure Data: " + responseString);
+        writer.WriteLine($"Azure Data: {responseString}");
+        //Console.WriteLine("Azure Data: " + responseString);
         return;
     }
 }
