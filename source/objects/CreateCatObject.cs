@@ -5,7 +5,7 @@ public class CreateCatObject {
 
     private static Random rnd = new Random();
 
-    public static Cat CreateCat(bool print) 
+    public static Cat CreateCat(bool printAllInsuranceData) 
     {
         var cat = new Cat
         {
@@ -21,6 +21,7 @@ public class CreateCatObject {
 
         // cat color
         cat.Farbe = getRandomCatColor(cat);
+
         // cat age
         cat.Alter = DateTime.Today.Year - DateTime.Parse(cat.Geburtstag).Year;
         
@@ -30,7 +31,7 @@ public class CreateCatObject {
         // cat enddatum
         cat.Enddatum = GetRandomFutureEndDate(cat.Beginndatum);
 
-        if (print)
+        if (printAllInsuranceData)
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Katzenrasse: {cat.Rasse.RassenName}");

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Finn_\\Desktop\\Tests\\Tests.csproj": {}
+    "C:\\Users\\Finn_\\Desktop\\CloudsHandsOn\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Finn_\\Desktop\\Tests\\Tests.csproj": {
+    "C:\\Users\\Finn_\\Desktop\\CloudsHandsOn\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Finn_\\Desktop\\Tests\\Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Finn_\\Desktop\\CloudsHandsOn\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "C:\\Users\\Finn_\\Desktop\\Tests\\Tests.csproj",
+        "projectPath": "C:\\Users\\Finn_\\Desktop\\CloudsHandsOn\\Tests\\Tests.csproj",
         "packagesPath": "C:\\Users\\Finn_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Finn_\\Desktop\\Tests\\obj\\",
+        "outputPath": "C:\\Users\\Finn_\\Desktop\\CloudsHandsOn\\Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

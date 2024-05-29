@@ -1,0 +1,51 @@
+Test 1 von 10, Zeitstempel: 29.05.2024 10:08:38
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Matthias","lastName":"Berger","title":"Prof. Dr. Dr","birthDate":"1964-12-25","socialSecurityNumber":"64779664W562","taxId":"28879613974","address":{"street":"Hofstraße","houseNumber":"314","zipCode":"00651","city":"Mannheim"},"bankDetails":{"iban":"DE22000000001753875129","bic":"JMQGDE99280","name":"Matthias Berger"}},"contract":{"startDate":"2024-06-15","endDate":"2024-12-31","coverage":48000,"catName":"Angel","breed":"Abyssinian","color":"Schildpatt","birthDate":"1964-12-25","neutered":true,"personality":"Anhänglich","environment":"Drinnen","weight":2172}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 754 ms
+-------------------------------------------------
+Test 2 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Ralf","lastName":"Ziegler","title":"Prof. Dr. Dr","birthDate":"1982-09-01","socialSecurityNumber":"66683506R509","taxId":"27223459870","address":{"street":"Schloßberg","houseNumber":"323","zipCode":"27644","city":"Neumünster"},"bankDetails":{"iban":"DE22000000001065464425","bic":"UIQADE88852","name":"Ralf Ziegler"}},"contract":{"startDate":"2024-06-15","endDate":"2024-10-14","coverage":41000,"catName":"Luna","breed":"Scottish Fold","color":"Blau","birthDate":"1982-09-01","neutered":true,"personality":"Anhänglich","environment":"Draußen","weight":6829}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 144 ms
+-------------------------------------------------
+Test 3 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Michael","lastName":"Ullrich","title":"Prof. Dr. Dr","birthDate":"1962-08-22","socialSecurityNumber":"42732292Y671","taxId":"48128329902","address":{"street":"Schillerstraße","houseNumber":"242","zipCode":"44140","city":"Königswinter"},"bankDetails":{"iban":"DE22000000001899221122","bic":"PSKQDE99606","name":"Michael Ullrich"}},"contract":{"startDate":"2024-06-15","endDate":"2024-07-14","coverage":13000,"catName":"Mittens","breed":"Maine Coon","color":"Weiß","birthDate":"1962-08-22","neutered":false,"personality":"Anhänglich","environment":"Drinnen","weight":3154}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 73 ms
+-------------------------------------------------
+Test 4 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Klaus","lastName":"Vetter","title":"Prof. Dr. Dr","birthDate":"1959-08-07","socialSecurityNumber":"48270147R511","taxId":"46212511523","address":{"street":"Friedrichstraße","houseNumber":"357","zipCode":"07071","city":"Koblenz"},"bankDetails":{"iban":"DE22000000001211160571","bic":"GHEIDE06079","name":"Klaus Vetter"}},"contract":{"startDate":"2024-06-01","endDate":"2024-12-31","coverage":27000,"catName":"Lily","breed":"Scottish Fold","color":"Creme","birthDate":"1959-08-07","neutered":true,"personality":"Anhänglich","environment":"Drinnen","weight":3559}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 71 ms
+-------------------------------------------------
+Test 5 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Gerd","lastName":"Walter","title":"Dr.","birthDate":"1971-03-17","socialSecurityNumber":"94043573O175","taxId":"17588392441","address":{"street":"Bahnhofstraße","houseNumber":"461","zipCode":"08266","city":"Langenfeld"},"bankDetails":{"iban":"DE22000000001134132852","bic":"XGYLDE58218","name":"Gerd Walter"}},"contract":{"startDate":"2024-06-01","endDate":"2024-10-31","coverage":2000,"catName":"Peanut","breed":"Siamese","color":"Creme","birthDate":"1971-03-17","neutered":false,"personality":"Anhänglich","environment":"Draußen","weight":2972}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 91 ms
+-------------------------------------------------
+Test 6 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Manfred","lastName":"Vetter","title":"Prof. Dr. Dr","birthDate":"1988-02-21","socialSecurityNumber":"80424114M338","taxId":"69157430589","address":{"street":"Schulweg","houseNumber":"303","zipCode":"44373","city":"Brandenburg an der Havel"},"bankDetails":{"iban":"DE22000000001066292263","bic":"CKLEDE06248","name":"Manfred Vetter"}},"contract":{"startDate":"2024-06-01","endDate":"2024-12-14","coverage":11000,"catName":"Molly","breed":"Perser","color":"Schildpatt","birthDate":"1988-02-21","neutered":false,"personality":"Anhänglich","environment":"Drinnen","weight":3469}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 57 ms
+-------------------------------------------------
+Test 7 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Markus","lastName":"Reuter","title":"Dr.","birthDate":"1975-03-27","socialSecurityNumber":"94046507G675","taxId":"94584715338","address":{"street":"Gartenstraße","houseNumber":"195","zipCode":"32106","city":"Jena"},"bankDetails":{"iban":"DE22000000001241572541","bic":"IBNYDE90983","name":"Markus Reuter"}},"contract":{"startDate":"2024-06-01","endDate":"2024-10-31","coverage":16000,"catName":"Cleo","breed":"Maine Coon","color":"Grau","birthDate":"1975-03-27","neutered":true,"personality":"Anhänglich","environment":"Drinnen","weight":8343}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 74 ms
+-------------------------------------------------
+Test 8 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Gerhard","lastName":"Krüger","title":"Dr. Dr.","birthDate":"1977-07-09","socialSecurityNumber":"73859211E502","taxId":"99887630134","address":{"street":"Lindenstraße","houseNumber":"149","zipCode":"12309","city":"Stuttgart"},"bankDetails":{"iban":"DE22000000000842656315","bic":"TYOGDE19001","name":"Gerhard Krüger"}},"contract":{"startDate":"2024-06-15","endDate":"2024-12-14","coverage":23000,"catName":"Salem","breed":"British Shorthair","color":"Braun","birthDate":"1977-07-09","neutered":false,"personality":"Anhänglich","environment":"Drinnen","weight":11119}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 72 ms
+-------------------------------------------------
+Test 9 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Jens","lastName":"Klein","title":"Prof. Dr. Dr","birthDate":"1946-08-31","socialSecurityNumber":"19821051C241","taxId":"71262423365","address":{"street":"Schulze Delitzsch Straße","houseNumber":"386","zipCode":"04391","city":"Düsseldorf"},"bankDetails":{"iban":"DE22000000000820400650","bic":"TMDJDE10706","name":"Jens Klein"}},"contract":{"startDate":"2024-06-15","endDate":"2024-10-14","coverage":35000,"catName":"Whiskers","breed":"Bengal","color":"Braun","birthDate":"1946-08-31","neutered":false,"personality":"Anhänglich","environment":"Drinnen","weight":10076}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 68 ms
+-------------------------------------------------
+Test 10 von 10, Zeitstempel: 29.05.2024 10:08:39
+{"customer":{"email":"caennethtest@gmail.com","firstName":"Heinz","lastName":"Lorenz","title":"Prof. Dr.","birthDate":"1996-04-22","socialSecurityNumber":"91198932J712","taxId":"77892993456","address":{"street":"Schloßstraße","houseNumber":"481","zipCode":"11882","city":"Bremerhaven"},"bankDetails":{"iban":"DE22000000000567588864","bic":"NIUEDE17778","name":"Heinz Lorenz"}},"contract":{"startDate":"2024-06-01","endDate":"2024-10-14","coverage":18000,"catName":"Oreo","breed":"Bengal","color":"Schildpatt","birthDate":"1996-04-22","neutered":false,"personality":"Anhänglich","environment":"Drinnen","weight":7278}}
+AWS Data: Invalid request body
+Dauer der API-Anfrage: 80 ms
+-------------------------------------------------
+Dauer der 10 API-Requests: 1492 ms

@@ -2,12 +2,12 @@ using System.Text;
 using System.Text.Json;
 
 public class Create_Customer_API_Request_AWS {
-    public async Task SendRequest(string Email, string FirstName, string LastName, string Title, string BirthDate, string SocialSecurityNumber, string TaxId, string Street, string HouseNumber, string ZipCode, string City, string Iban, string Bic, string Name, string StartDate, string EndDate, int Coverage, string CatName, string Breed, string Color, bool Neutered, string Personality, string Environemnt, int Weight, StreamWriter writer)
+    public async Task SendRequest(string Email, string FirstName, string LastName, string Title, string BirthDate, string SocialSecurityNumber, string TaxId, string Street, string HouseNumber, int ZipCode, string City, string Iban, string Bic, string Name, string StartDate, string EndDate, int Coverage, string CatName, string Breed, string Color, bool Neutered, string Personality, string Environemnt, int Weight, StreamWriter writer)
     {
-        //Console.WriteLine("Sending request to Azure API");
+        //Console.WriteLine("Sending request to AWS API");
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(10)
+            Timeout = TimeSpan.FromSeconds(1000)
         };
 
         var data = new 

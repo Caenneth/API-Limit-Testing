@@ -5,7 +5,7 @@ public class CreateCustomerObject {
 
     private static Random rnd = new Random();
 
-    public static Customer CreateCustomer(bool print) {
+    public static Customer CreateCustomer(bool printAllInsuranceData) {
 
         var customer = new Customer 
         {
@@ -25,11 +25,11 @@ public class CreateCustomerObject {
             SteuerID = rnd.Next(10000000, 99999999).ToString() + rnd.Next(100, 999).ToString(),
         };
 
-        customer.Email = "finnwolters@web.de";
+        customer.Email = "caennethtest@gmail.com";
 
         // sv_nummer 
         // 8 ziffern + 1 letter + 3 ziffern
-        if (print) {
+        if (printAllInsuranceData) {
             var sb = new StringBuilder();
             sb.AppendLine($"Kundenvorname: {customer.Vorname}");
             sb.AppendLine($"Kundenname: {customer.Nachname}");

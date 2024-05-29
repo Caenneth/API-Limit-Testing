@@ -5,7 +5,7 @@ namespace Rate_Tests
 {
     class RateTesting 
     {
-        public static async Task CalculateRate(bool print, Customer customer, Cat cat)        
+        public static async Task CalculateRate(bool printAllInsuranceData, Customer customer, Cat cat)        
         {
             Console.WriteLine($"Deckung: {cat.Deckung}");
 
@@ -17,7 +17,7 @@ namespace Rate_Tests
             double grundkosten = BerechneGrundkosten(cat);
             double prozentSatz = BerechneProzentsatz(customer, cat);
             double aufschlag = BerechneAufschlag(cat);
-            if (print) {
+            if (printAllInsuranceData) {
                 Console.WriteLine($"Grundkosten: {grundkosten}");
                 Console.WriteLine($"ProzentSatz: {prozentSatz}");
                 Console.WriteLine($"Aufschlag: {aufschlag}");

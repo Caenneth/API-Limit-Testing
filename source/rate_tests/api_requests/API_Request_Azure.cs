@@ -8,7 +8,7 @@ public class Rate_Calculation_API_Request_Azure {
         //Console.WriteLine("Sending request to Azure API");
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(10)
+            Timeout = TimeSpan.FromSeconds(100)
         };
 
         var data = new 

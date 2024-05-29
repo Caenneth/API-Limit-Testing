@@ -7,7 +7,7 @@ public class Create_Customer_API_Request_Azure {
         //Console.WriteLine("Sending request to Azure API");
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(10)
+            Timeout = TimeSpan.FromSeconds(1000)
         };
 
         var data = new 
