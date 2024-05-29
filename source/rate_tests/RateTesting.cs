@@ -5,15 +5,28 @@ namespace Rate_Tests
 {
     class RateTesting 
     {
-        public static async Task CalculateRate(bool printAllInsuranceData, Customer customer, Cat cat)        
+        public static async Task RateTests(int amountOfTests, bool printAPIResponse, List<Cat> cats, List<Customer> customers, bool azureRateTest, bool awsRateTest) 
+        {
+            for (int i = 0; i < amountOfTests; i++) {
+                Console.WriteLine($"Test {i + 1} von {amountOfTests}");
+                await CalculateRate(printAPIResponse, customers[i], cats[i], azureRateTest, awsRateTest);
+                Console.WriteLine("-------------------------------------------------");
+            }
+        }
+        public static async Task CalculateRate(bool printAllInsuranceData, Customer customer, Cat cat, bool azureRateTest, bool awsRateTest)        
         {
             Console.WriteLine($"Deckung: {cat.Deckung}");
 
-            Rate_Calculation_API_Request_Azure apiRequestAzure = new Rate_Calculation_API_Request_Azure();
+            if (azureRateTest) 
+            {
+                Rate_Calculation_API_Request_Azure apiRequestAzure = new Rate_Calculation_API_Request_Azure();
             await apiRequestAzure.SendRequest(cat.Deckung, cat.Rasse.RassenName, cat.Farbe, cat.Geburtstag, cat.Kastriert, cat.Persönlichkeit, cat.Umgebung, cat.Gewicht, customer.Postleitzahl);
-            Rate_Calculation_API_Request_AWS apiRequestAWS = new Rate_Calculation_API_Request_AWS();
-            await apiRequestAWS.SendRequest(cat.Deckung, cat.Rasse.RassenName, cat.Farbe, cat.Geburtstag, cat.Kastriert, cat.Persönlichkeit, cat.Umgebung, cat.Gewicht, customer.Postleitzahl);
-
+            }
+            if (awsRateTest) 
+            {
+                Rate_Calculation_API_Request_AWS apiRequestAWS = new Rate_Calculation_API_Request_AWS();
+                await apiRequestAWS.SendRequest(cat.Deckung, cat.Rasse.RassenName, cat.Farbe, cat.Geburtstag, cat.Kastriert, cat.Persönlichkeit, cat.Umgebung, cat.Gewicht, customer.Postleitzahl);
+            }
             double grundkosten = BerechneGrundkosten(cat);
             double prozentSatz = BerechneProzentsatz(customer, cat);
             double aufschlag = BerechneAufschlag(cat);

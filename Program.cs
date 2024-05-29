@@ -2,72 +2,77 @@
 using Catnamespace;
 using Customernamespace;
 using Customer_Tests;
-using System.Diagnostics;
-using System.Runtime;
-using Microsoft.VisualBasic;
+using System.Windows.Forms;
+
+public class TestForm : Form
+{
+    Label lblAmountOfTests = new Label() { Text = "Anzahl der Tests:", Location = new Point(10, 10) };
+    TextBox txtAmountOfTests = new TextBox() { Location = new Point(120, 10) };
+    CheckBox chkAzureRateTest = new CheckBox() { Text = "Azure Rate Testen", Location = new Point(10, 40), Width = 200 };
+    CheckBox chkAWSRateTest = new CheckBox() { Text = "AWS Rate Testen", Location = new Point(10, 70), Width = 200 };
+    CheckBox chkAzureQueueTests = new CheckBox() { Text = "Azure Queue Testen", Location = new Point(10, 100), Width = 200 };
+    CheckBox chkAWSQueueTests = new CheckBox() { Text = "AWS Queue Testen", Location = new Point(10, 130), Width = 200 };
+    CheckBox chkPrintAllInsuranceData = new CheckBox() { Text = "Versicherungsdaten ausgeben", Location = new Point(10, 160), Width = 200 };
+    CheckBox chkPrintAPIResponse = new CheckBox() { Text = "API-Antwort ausgeben", Location = new Point(10, 190), Width = 200 };
+    Button btnStart = new Button() { Text = "Start", Location = new Point(10, 220) };
+
+    public TestForm()
+    {
+        Controls.Add(lblAmountOfTests);
+        Controls.Add(txtAmountOfTests);
+        Controls.Add(chkAzureRateTest);
+        Controls.Add(chkAWSRateTest);
+        Controls.Add(chkAzureQueueTests);
+        Controls.Add(chkAWSQueueTests);
+        Controls.Add(chkPrintAllInsuranceData);
+        Controls.Add(chkPrintAPIResponse);
+        Controls.Add(btnStart);
+
+        btnStart.Click += BtnStart_Click;
+    }
+
+    private async void BtnStart_Click(object sender, EventArgs e)
+    {
+        int amountOfTests = int.Parse(txtAmountOfTests.Text);
+        bool printAllInsuranceData = chkPrintAllInsuranceData.Checked;
+        bool printAPIResponse = chkPrintAPIResponse.Checked;
+
+        bool azureRateTest = chkAzureRateTest.Checked;
+        bool awsRateTest = chkAWSRateTest.Checked;
+
+        bool azureQueueTests = chkAzureQueueTests.Checked;
+        bool awsQueueTests = chkAWSQueueTests.Checked;
+
+        await MainClass.RunTests(amountOfTests, printAllInsuranceData, printAPIResponse, azureRateTest, awsRateTest, azureQueueTests, awsQueueTests);
+    }
+}
+
+public static class Program
+{
+    [STAThread]
+    static void Main()
+    {
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new TestForm());
+    }
+}
 
 public class MainClass {
-    public static async Task Main() {
-        // Set the amount of tests and if you want to do rate tests or queue tests
-        const int amountOfTests = 10;
-        const bool doRateTests = false;
-        const bool doQueueTests = true;
-
-        // Print extra data for debugging
-        var printAllInsuranceData = false;
-        var printAPIResponse = false;
+    public static async Task RunTests(int amountOfTests, bool printAllInsuranceData, bool printAPIResponse, bool azureRateTest, bool awsRateTest, bool azureQueueTests, bool awsQueueTests) {
 
         Console.WriteLine("Started Testing, please wait ...");
         var (cats, customers) = await InsuranceCreation.CreateTestInsurances(amountOfTests, printAllInsuranceData);
-        if (doRateTests) 
+        if (azureRateTest || awsRateTest) 
         {
-            await RateTests(amountOfTests, printAPIResponse, cats, customers);
+            await RateTesting.RateTests(amountOfTests, printAPIResponse, cats, customers, azureRateTest, awsRateTest);
         }
-        if (doQueueTests) 
+        if (azureQueueTests || awsQueueTests) 
         {
-            await QueueTests(amountOfTests, printAPIResponse, cats, customers);
+            await CustomerTesting.QueueTests(amountOfTests, printAPIResponse, cats, customers, azureQueueTests, awsQueueTests);
         }
         Console.WriteLine("Tests Completed.");
         return;
-    }
-    public static async Task RateTests(int amountOfTests, bool printAPIResponse, List<Cat> cats, List<Customer> customers) 
-    {
-        for (int i = 0; i < amountOfTests; i++) {
-            Console.WriteLine($"Test {i + 1} von {amountOfTests}");
-            await RateTesting.CalculateRate(printAPIResponse, customers[i], cats[i]);
-            Console.WriteLine("-------------------------------------------------");
-        }
-    }
-
-    public static async Task QueueTests(int amountOfTests, bool printAPIResponse, List<Cat> cats, List<Customer> customers) {
-        string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-
-        Stopwatch stopwatch1 = Stopwatch.StartNew();
-        using (StreamWriter writer = new StreamWriter($"outputs/output_{timestamp}.txt")) {
-            for (int i = 0; i < amountOfTests; i++) {
-                writer.WriteLine($"Test {i + 1} von {amountOfTests}, Zeitstempel: {DateTime.Now}");
-                
-                // Starten der Stoppuhr
-                Stopwatch stopwatch2 = Stopwatch.StartNew(); 
-                
-                // Azure und AWS API-Requests
-                //await CustomerTesting.AzureCreateContract(printAPIResponseToConsole, customers[i], cats[i], writer);
-                await CustomerTesting.AWSCreateContract(printAPIResponse, customers[i], cats[i], writer);
-                
-                // Stoppen der Stoppuhr
-                stopwatch2.Stop(); 
-
-                // Schreiben der verstrichenen Zeit in Millisekunden in die Datei
-                writer.WriteLine($"Dauer der API-Anfrage: {stopwatch2.ElapsedMilliseconds} ms"); 
-                writer.WriteLine("-------------------------------------------------");
-            }
-            // Stoppen der Stoppuhr
-            stopwatch1.Stop();
-            // Schreiben der Gesamtzeit ans Ende der Datei
-            writer.WriteLine($"Dauer der {amountOfTests} API-Requests: {stopwatch1.ElapsedMilliseconds} ms");
-        }
-        // Graph erstellen
-        Graph.CreateGraph(timestamp);
     }
 }
 

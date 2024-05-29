@@ -1,1 +1,5 @@
-output.txt
+outputs/aws/*
+outputs/azure/*
+
+diagramme/aws/*
+diagramme/azure/*

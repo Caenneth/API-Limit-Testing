@@ -3,14 +3,20 @@ import datetime
 import os
 import sys
 
-timestamp = sys.argv[1]
+platform = sys.argv[1]
+timestamp = sys.argv[2]
 
 # Lese die Datei
-with open(f'outputs/output_{timestamp}.txt', 'r', encoding='utf-8') as f:
+with open(f'outputs/{platform}/output_{timestamp}.txt', 'r', encoding='utf-8') as f:
     lines = f.readlines()
 
+if platform == "aws":
+    platform = "AWS"
+elif platform == "azure":
+    platform = "Azure"
+
 # Extrahiere die Millisekunden
-milliseconds = [int(line.split()[-2]) for line in lines if "Dauer der API-Anfrage" in line]
+milliseconds = [int(line.split()[-2]) for line in lines if f'Dauer der {platform} API-Anfrage' in line]
 
 # Erstelle die x-Achse (Gesamtzahl der Aufrufe)
 x = list(range(1, len(milliseconds) + 1))
@@ -34,11 +40,14 @@ if not os.path.exists('diagramme'):
     os.makedirs('diagramme')
 
 # Speichere das Diagramm mit dem aktuellen Zeitstempel
-plt.savefig(f'diagramme/graph_{timestamp}.png')
+plt.savefig(f'diagramme/{platform}/graph_{timestamp}.png')
 
 # Initialisieren Sie die maximale Dauer und die entsprechende Zeile
 max_duration = 0
 max_line = ""
+
+plt.show()
+exit()
 
 # Initialisieren Sie ein Dictionary, um die Dauer und die entsprechende Zeile zu speichern
 durations = {}
@@ -47,7 +56,7 @@ top = 5
 # Durchlaufen Sie jede Zeile
 for i in range(len(lines)):
     # Überprüfen Sie, ob die Zeile die Dauer der API-Anfrage enthält
-    if "Dauer der API-Anfrage" in lines[i]:
+    if f'Dauer der {platform} API-Anfrage' in lines[i]:
         # Extrahieren Sie die Dauer in Millisekunden
         duration_ms = int(lines[i].split()[-2])
         test = lines[i-3]
@@ -65,5 +74,5 @@ for i in range(top):
     test, json, reply, duration, _ = sorted_durations[i][0]
     print(f"{test}{json}{reply}{duration}")
 
-plt.show()
+
 
