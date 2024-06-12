@@ -9,6 +9,8 @@ public class Create_Customer_API_Request_Azure {
         {
             Timeout = TimeSpan.FromSeconds(1000)
         };
+        //var accessKey = "7b8ad6faf18b4b4db117e8fb75cc440d";
+        //client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", accessKey);
 
         var data = new 
         {
@@ -61,7 +63,14 @@ public class Create_Customer_API_Request_Azure {
         //Console.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-        var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/apply", content);
+        // default function request
+        var url = "https://meowmedazure-functions.azurewebsites.net/api/customer/apply?code=QjQ_X9KQiihpGMTSk_K1UGADajFTt_zYABMpI-IV9xobAzFuKs6KqA%3D%3D";
+        var functionKey = "QjQ_X9KQiihpGMTSk_K1UGADajFTt_zYABMpI-IV9xobAzFuKs6KqA==";
+
+        var response = await client.PostAsync(url, content);
+
+        // APIM Request
+        //var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/apply", content);
         var responseString = await response.Content.ReadAsStringAsync();
         writer.WriteLine($"Azure Data: {responseString}");
         //Console.WriteLine("Azure Data: " + responseString);

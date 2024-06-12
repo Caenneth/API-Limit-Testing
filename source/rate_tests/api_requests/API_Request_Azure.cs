@@ -3,12 +3,12 @@ using System.Text.Json;
 using System.Net.Http;
 
 public class Rate_Calculation_API_Request_Azure {
-    public async Task SendRequest(int coverage, string breed, string color, string birthDate, bool neutered, string personality, string environment, int weight, string zipCode)
+    public async Task SendRequest(int coverage, string breed, string color, string birthDate, bool neutered, string personality, string environment, int weight, string zipCode, StreamWriter writer)
     {
         //Console.WriteLine("Sending request to Azure API");
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(100)
+            Timeout = TimeSpan.FromSeconds(1000)
         };
 
         var data = new 
@@ -30,12 +30,12 @@ public class Rate_Calculation_API_Request_Azure {
         };
 
         var jsonData = JsonSerializer.Serialize(data, options);
-        //Console.WriteLine(jsonData);
+        writer.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
         var response = await client.PostAsync("https://meowmedazure-apim.azure-api.net/customer/rate", content);
         var responseString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine("Azure Data: " + responseString);
+        writer.WriteLine("Azure Data: " + responseString);
         return;
     }
 }

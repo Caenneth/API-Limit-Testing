@@ -12,8 +12,13 @@ with open(f'outputs/{platform}/output_{timestamp}.txt', 'r', encoding='utf-8') a
 
 if platform == "aws":
     platform = "AWS"
+elif platform == "aws/rate":
+    platform = "AWS"
 elif platform == "azure":
     platform = "Azure"
+elif platform == "azure/rate":
+    platform = "Azure"
+
 
 # Extrahiere die Millisekunden
 milliseconds = [int(line.split()[-2]) for line in lines if f'Dauer der {platform} API-Anfrage' in line]

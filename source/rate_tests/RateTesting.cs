@@ -1,32 +1,69 @@
 using Catnamespace;
 using Customernamespace; 
+using System.Diagnostics;
 
 namespace Rate_Tests
 {
     class RateTesting 
     {
-        public static async Task RateTests(int amountOfTests, bool printAPIResponse, List<Cat> cats, List<Customer> customers, bool azureRateTest, bool awsRateTest) 
+        public static async Task CalculateRate(bool printAllInsuranceData, List<Customer> customers, List<Cat> cats, bool azureRateTest, bool awsRateTest, int amountOfTests)        
         {
-            for (int i = 0; i < amountOfTests; i++) {
-                Console.WriteLine($"Test {i + 1} von {amountOfTests}");
-                await CalculateRate(printAPIResponse, customers[i], cats[i], azureRateTest, awsRateTest);
-                Console.WriteLine("-------------------------------------------------");
-            }
-        }
-        public static async Task CalculateRate(bool printAllInsuranceData, Customer customer, Cat cat, bool azureRateTest, bool awsRateTest)        
-        {
-            Console.WriteLine($"Deckung: {cat.Deckung}");
+            //Console.WriteLine($"Deckung: {cat.Deckung}");
 
-            if (azureRateTest) 
+            string timestamp = DateTime.Now.ToString("ddMMyyyy-HHmmss");
+
+            if (azureRateTest)
             {
-                Rate_Calculation_API_Request_Azure apiRequestAzure = new Rate_Calculation_API_Request_Azure();
-            await apiRequestAzure.SendRequest(cat.Deckung, cat.Rasse.RassenName, cat.Farbe, cat.Geburtstag, cat.Kastriert, cat.Persönlichkeit, cat.Umgebung, cat.Gewicht, customer.Postleitzahl);
+                using (StreamWriter writer = new StreamWriter($"./outputs/azure/rate/output_{timestamp}.txt")) 
+                {
+                    Stopwatch stopwatchAzure = Stopwatch.StartNew();
+                    for (int i = 0; i < amountOfTests; i++) 
+                    {
+                        writer.WriteLine($"Azure Test {i + 1} von {amountOfTests}, Zeitstempel: {DateTime.Now}");
+
+                        Stopwatch stopwatch2 = Stopwatch.StartNew(); 
+                        
+                        Rate_Calculation_API_Request_Azure apiRequestAzure = new Rate_Calculation_API_Request_Azure();
+                        await apiRequestAzure.SendRequest(cats[i].Deckung, cats[i].Rasse.RassenName, cats[i].Farbe, cats[i].Geburtstag, cats[i].Kastriert, cats[i].Persönlichkeit, cats[i].Umgebung, cats[i].Gewicht, customers[i].Postleitzahl, writer);
+                        
+                        stopwatch2.Stop(); 
+
+                        writer.WriteLine($"Dauer der Azure API-Anfrage: {stopwatch2.ElapsedMilliseconds} ms"); 
+                        writer.WriteLine("-------------------------------------------------");
+                    }
+                    stopwatchAzure.Stop();
+                    writer.WriteLine($"Dauer der {amountOfTests} Azure API-Requests: {stopwatchAzure.ElapsedMilliseconds} ms");
+                }
+                Graph.CreateGraph("azure/rate",timestamp);
             }
-            if (awsRateTest) 
+
+            if (awsRateTest)
             {
-                Rate_Calculation_API_Request_AWS apiRequestAWS = new Rate_Calculation_API_Request_AWS();
-                await apiRequestAWS.SendRequest(cat.Deckung, cat.Rasse.RassenName, cat.Farbe, cat.Geburtstag, cat.Kastriert, cat.Persönlichkeit, cat.Umgebung, cat.Gewicht, customer.Postleitzahl);
+                using (StreamWriter writer = new StreamWriter($"./outputs/aws/rate/output_{timestamp}.txt")) 
+                {
+                    Stopwatch stopwatchAWS = Stopwatch.StartNew();
+                    for (int i = 0; i < amountOfTests; i++) 
+                    {
+                        writer.WriteLine($"AWS Test {i + 1} von {amountOfTests}, Zeitstempel: {DateTime.Now}");
+
+                        Stopwatch stopwatch2 = Stopwatch.StartNew(); 
+                        
+                        Rate_Calculation_API_Request_AWS apiRequestAWS = new Rate_Calculation_API_Request_AWS();
+                        await apiRequestAWS.SendRequest(cats[i].Deckung, cats[i].Rasse.RassenName, cats[i].Farbe, cats[i].Geburtstag, cats[i].Kastriert, cats[i].Persönlichkeit, cats[i].Umgebung, cats[i].Gewicht, customers[i].Postleitzahl, writer);
+            
+                        stopwatch2.Stop(); 
+
+                        writer.WriteLine($"Dauer der AWS API-Anfrage: {stopwatch2.ElapsedMilliseconds} ms"); 
+                        writer.WriteLine("-------------------------------------------------");
+                    }
+                    stopwatchAWS.Stop();
+                    writer.WriteLine($"Dauer der {amountOfTests} AWS API-Requests: {stopwatchAWS.ElapsedMilliseconds} ms");
+                }
+                Graph.CreateGraph("aws/rate",timestamp);
             }
+
+            return;
+            /*
             double grundkosten = BerechneGrundkosten(cat);
             double prozentSatz = BerechneProzentsatz(customer, cat);
             double aufschlag = BerechneAufschlag(cat);
@@ -38,6 +75,7 @@ namespace Rate_Tests
 
             double endkosten = Math.Round((grundkosten * prozentSatz) + aufschlag, 2);
             Console.WriteLine($"Gesamtpreis: {endkosten}");
+            */
         }
 
         private static double BerechneAufschlag(Cat cat)

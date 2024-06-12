@@ -3,12 +3,12 @@ using System.Text.Json;
 using System.Net.Http;
 
 public class Rate_Calculation_API_Request_AWS {
-    public async Task SendRequest(int coverage, string breed, string color, string birthDate, bool neutered, string personality, string environment, int weight, string zipCode)
+    public async Task SendRequest(int coverage, string breed, string color, string birthDate, bool neutered, string personality, string environment, int weight, string zipCode, StreamWriter writer)
     {
         //Console.WriteLine("Sending request to Azure API");
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(100)
+            Timeout = TimeSpan.FromSeconds(1000)
         };
 
         
@@ -33,12 +33,12 @@ public class Rate_Calculation_API_Request_AWS {
         };
 
         var jsonData = JsonSerializer.Serialize(data, options);
-        Console.WriteLine(jsonData);
+        writer.WriteLine(jsonData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
         var response = await client.PostAsync("https://w7gl0flz6e.execute-api.eu-central-1.amazonaws.com/Stage/rate", content);
         var responseString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine("AWS Data: " + responseString);
+        writer.WriteLine("AWS Data: " + responseString);
         return;
     }
 }

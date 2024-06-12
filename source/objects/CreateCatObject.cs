@@ -152,7 +152,7 @@ public class CreateCatObject {
     {
         Random rand = new Random();
         DateTime today = DateTime.Today;
-        int futureMonth = rand.Next(today.Month + 1, 6);
+        int futureMonth = rand.Next(today.Month + 1, 8);
         int day = rand.Next(2) == 0 ? 1 : 15;
 
         DateTime futureDate = new DateTime(today.Year, futureMonth, day);
@@ -168,7 +168,7 @@ public class CreateCatObject {
         // get the month of the start date
         int startMonth = DateTime.Parse(startDate).Month;
         // füge 1 bis 6 Monate hinzu
-        int futureMonth = rand.Next(startMonth + 1, startMonth + 7);
+        int futureMonth = rand.Next(startMonth + 1, startMonth + 3);
         // wenn monat keine 31 tage hat erhöhe den monat um 1
         if (futureMonth == 2 || futureMonth == 4 || futureMonth == 6 || futureMonth == 9 || futureMonth == 11)
         {

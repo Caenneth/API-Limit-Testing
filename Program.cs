@@ -1,8 +1,5 @@
 ﻿using Rate_Tests;
-using Catnamespace;
-using Customernamespace;
 using Customer_Tests;
-using System.Windows.Forms;
 
 public class TestForm : Form
 {
@@ -65,7 +62,7 @@ public class MainClass {
         var (cats, customers) = await InsuranceCreation.CreateTestInsurances(amountOfTests, printAllInsuranceData);
         if (azureRateTest || awsRateTest) 
         {
-            await RateTesting.RateTests(amountOfTests, printAPIResponse, cats, customers, azureRateTest, awsRateTest);
+            await RateTesting.CalculateRate(printAPIResponse, customers, cats, azureRateTest, awsRateTest, amountOfTests);
         }
         if (azureQueueTests || awsQueueTests) 
         {
