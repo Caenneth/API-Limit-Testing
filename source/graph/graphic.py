@@ -78,6 +78,3 @@ sorted_durations = sorted(durations.items(), key=lambda item: item[0][4], revers
 for i in range(top):
     test, json, reply, duration, _ = sorted_durations[i][0]
     print(f"{test}{json}{reply}{duration}")
-
-
-
