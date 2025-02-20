@@ -3,3 +3,8 @@ outputs/azure/*
 
 diagramme/aws/*
 diagramme/azure/*
+
+bin/Debug
+node_modules
+obj
+scriptcs_bin/*
